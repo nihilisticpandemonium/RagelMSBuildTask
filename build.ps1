@@ -10,10 +10,7 @@ function exec($_cmd) {
 }
 
 Remove-Item artifacts/ -Recurse -ErrorAction Ignore
-Remove-Item Source/GreetingTasks/obj/ -Recurse -ErrorAction Ignore
-Remove-Item Example/obj/ -Recurse -ErrorAction Ignore
+Remove-Item Source/RagelTask/obj/ -Recurse -ErrorAction Ignore
 
-exec dotnet restore ./Source/GreetingTasks/
-exec dotnet pack -c Release ./Source/GreetingTasks/
-exec dotnet restore ./Example/
-exec dotnet msbuild /nologo '/t:Greet;Thank' ./Example/
+exec dotnet restore ./Source/RagelTask/
+exec dotnet pack -c Release ./Source/RagelTask/

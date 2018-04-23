@@ -12,11 +12,8 @@ __exec() {
     $cmd $@
 }
 
-rm -r artifacts/
-rm -r Example/obj/
-rm -r Source/GreetingTasks/obj/
+rm -r artifacts/ ||:
+rm -r Source/RagelMSBuildTask/obj/ ||:
 
-__exec dotnet restore ./Source/GreetingTasks/
-__exec dotnet pack -c Release ./Source/GreetingTasks/
-__exec dotnet restore ./Example/
-__exec dotnet msbuild /nologo '/t:Greet;Thank' ./Example/
+__exec dotnet restore ./Source/RagelMSBuildTask/
+__exec dotnet pack -c Release ./Source/RagelMSBuildTask/
