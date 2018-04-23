@@ -10,7 +10,7 @@ function exec($_cmd) {
 }
 
 Remove-Item artifacts/ -Recurse -ErrorAction Ignore
-Remove-Item Source/RagelTask/obj/ -Recurse -ErrorAction Ignore
+Remove-Item Source/RagelMSBuildTask/obj/ -Recurse -ErrorAction Ignore
 
-exec dotnet restore ./Source/RagelTask/
-exec dotnet pack -c Release ./Source/RagelTask/
+exec dotnet restore ./Source/RagelMSBuildTask/
+exec dotnet pack -c Release ./Source/RagelMSBuildTask/
