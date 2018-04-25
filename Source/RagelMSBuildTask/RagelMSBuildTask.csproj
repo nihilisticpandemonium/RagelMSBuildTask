@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <!-- makes this sample work when compiling on macOS and Linux because .NET Framework is not available -->
-    <TargetFrameworks Condition="$(OS) != 'Windows_NT'">netstandard1.6</TargetFrameworks>
+    <TargetFrameworks Condition="$(OS) != 'Windows_NT'">netstandard2.0</TargetFrameworks>
     <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\artifacts\</PackageOutputPath>
     <!-- Suppresses the warnings about the package not having assemblies in lib/*/.dll.-->
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <!-- Change the default location where NuGet will put the build output -->
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <!-- set the version automatically -->
-    <VersionPrefix>0.3.1</VersionPrefix>
-    <VersionSuffix>build$([System.DateTime]::Now.ToString('yyyyMMdd-HHmm'))</VersionSuffix>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <!--<VersionSuffix>build$([System.DateTime]::Now.ToString('yyyyMMdd-HHmm'))</VersionSuffix>-->
         <Authors>Michael Tindal</Authors>
         <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
         <PackageProjectUrl>https://bitbucket.org/chaoticvoid/ragelmsbuildtask</PackageProjectUrl>
