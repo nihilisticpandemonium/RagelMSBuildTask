@@ -1,5 +1,5 @@
 <Project>
-    <Target Name="Ragel" Inputs="@(Ragel)" Outputs="$(BasenItermediateOutputDir)$(Configuration)\@(Ragel-&gt;%(Filename).cs)">
+    <Target Name="Ragel" Inputs="@(Ragel)" Outputs="$(BaseIntermediateOutputDir)$(Configuration)\@(Ragel-&gt;%(Filename).cs)">
         <RagelTask Sources="@(Ragel)" OutputPath="$(BaseIntermediateOutputDir)$(Configuration)\">
             <Output ItemName="Generated" TaskParameter="Outputs" />
         </RagelTask>
