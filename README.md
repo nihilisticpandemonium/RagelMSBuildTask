@@ -1,13 +1,26 @@
-MSBuild Tasks (Sample project)
-==============================
+Ragel MSBuild Task
+==================
 
-Blog post: 
-[Shipping a cross-platform MSBuild task in a NuGet package](http://www.natemcmaster.com/blog/2017/07/05/msbuild-task-in-nuget/)
+Compiles Ragel files with the C# Language Target.
 
-This repo contains examples of how to build MSBuild tasks that run on both "msbuild.exe" (inside Visual Studio 2017) and
-with "dotnet.exe" (.NET Core CLI on Windows, Linux, and macOS).
+Very simple task with a few properties:
 
-To run this sample,
+  * ToolName: Name of the tool, default ragel.exe on Windows and ragel on Linux.
+  * ToolPath: Path to the tool, default C:\Ragel on Windows and /usr/bin on Linux.
+  * Inputs: List of ragel files ending with .rl to compile.
+  * OutputPath: Path to put the generated files in.  Default is $(BaseIntermediateOutputPath)$(Configuration)\
+  * Outputs: List of generated files that can be used to include files in compilation.  Default is @(Ragel->$(BaseIntermediateOutputPath)$(Configuration)\%(Filename).cs)
 
-1. Install .NET Core CLI 1.0.0 or greater. See <https://dot.net/core> for download links.
-2. Run `./build.ps1` in PowerShell or `./build.sh` from Bash.
+In Visual Studio:
+
+  Create or add a Ragel file.
+  Set its Build Action to Ragel.
+
+Elsewhere:
+  Add:
+    ```
+      <ItemGroup>
+        <Ragel Include="**\*.rl"/>
+      </ItemGroup>
+    ```
+  To automatically compile all Ragel files in the solution.

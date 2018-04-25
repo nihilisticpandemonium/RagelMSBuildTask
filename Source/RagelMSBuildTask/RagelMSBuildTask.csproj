@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.6;net46</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <!-- makes this sample work when compiling on macOS and Linux because .NET Framework is not available -->
     <TargetFrameworks Condition="$(OS) != 'Windows_NT'">netstandard1.6</TargetFrameworks>
     <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\artifacts\</PackageOutputPath>
@@ -10,8 +10,21 @@
     <!-- Change the default location where NuGet will put the build output -->
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <!-- set the version automatically -->
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.3.1</VersionPrefix>
     <VersionSuffix>build$([System.DateTime]::Now.ToString('yyyyMMdd-HHmm'))</VersionSuffix>
+        <Authors>Michael Tindal</Authors>
+        <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+        <PackageProjectUrl>https://bitbucket.org/chaoticvoid/ragelmsbuildtask</PackageProjectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <Description>A MSBuild task to generate C# files from Ragel source files.</Description>
+        <PackageReleaseNotes />
+        <Copyright>Copyright 2018 Michael Tindal</Copyright>
+        <PackageTags>ragel msbuild</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.6|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD2_0</DefineConstants>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
