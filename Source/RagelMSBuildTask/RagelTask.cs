@@ -25,9 +25,10 @@ namespace MSBuildTasks
 {
     public class RagelTask : ToolTask
     {
-        public static string GetToolName() 
+        protected override string ToolName
         {
-            
+            get
+            {
                 string windir = Environment.GetEnvironmentVariable("windir");
                 if (!string.IsNullOrEmpty(windir) && windir.Contains(@"\") && Directory.Exists(windir))
                 {
@@ -52,20 +53,20 @@ namespace MSBuildTasks
                     return "ragel-Darwin-x86_64";
                 }
                 return null;
-            
+            }
         }
 
-        private string GetToolPath() {
-            var assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var p = Path.DirectorySeparatorChar;
-            return $"{assemblyFolder}{p}..{p}..{p}content{p}tools{p}";
+        protected new string ToolPath
+        {
+            get
+            {
+                var assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var p = Path.DirectorySeparatorChar;
+                return $"{assemblyFolder}{p}..{p}..{p}content{p}tools{p}";
+            }
         }
 
-        protected override string ToolName => GetToolName();
-
-        protected new string ToolPath => GetToolPath();
-
-        public string WorkingDirectory { get; set;  }
+        public string WorkingDirectory { get; set; }
 
         [Required]
         public ITaskItem[] Sources { get; set; }
@@ -103,10 +104,12 @@ namespace MSBuildTasks
                 }
 
                 var outputPath = OutputPath ?? Path.GetDirectoryName(taskItem.ToString());
-                if (!outputPath.EndsWith(Path.DirectorySeparatorChar.ToString())) {
+                if (!outputPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                {
                     outputPath = $"{outputPath}{Path.DirectorySeparatorChar}";
                 }
-                if (!Directory.Exists(outputPath)) {
+                if (!Directory.Exists(outputPath))
+                {
                     Directory.CreateDirectory(outputPath);
                 }
                 var generatedFileName = $"{outputPath}{Path.GetFileNameWithoutExtension(taskItem.ToString())}.cs";
