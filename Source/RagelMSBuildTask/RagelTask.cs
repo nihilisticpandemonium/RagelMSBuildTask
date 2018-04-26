@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -24,14 +25,13 @@ namespace MSBuildTasks
 {
     public class RagelTask : ToolTask
     {
-        public static bool IsLinux
+        public static string GetToolName() 
         {
-            get
-            {
+            
                 string windir = Environment.GetEnvironmentVariable("windir");
                 if (!string.IsNullOrEmpty(windir) && windir.Contains(@"\") && Directory.Exists(windir))
                 {
-                    return false;
+                    return "ragel.exe";
                 }
                 else if (File.Exists(@"/proc/sys/kernel/ostype"))
                 {
@@ -39,25 +39,31 @@ namespace MSBuildTasks
                     if (osType.StartsWith("Linux", StringComparison.OrdinalIgnoreCase))
                     {
                         // Note: Android gets here too
-                        return true;
+                        return "ragel-Linux-x86_64";
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 else if (File.Exists(@"/System/Library/CoreServices/SystemVersion.plist"))
                 {
                     // Note: iOS gets here too
-                    return true;
+                    return "ragel-Darwin-x86_64";
                 }
-                return false;
-            }
+                return null;
+            
         }
 
-        protected override string ToolName => IsLinux ? "ragel" : "ragel.exe";
+        private string GetToolPath() {
+            var assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var p = Path.DirectorySeparatorChar;
+            return $"{assemblyFolder}{p}..{p}..{p}content{p}tools{p}";
+        }
 
-        public new string ToolPath => IsLinux ? "/usr/bin" : "C:\\Ragel\\";
+        protected override string ToolName => GetToolName();
+
+        protected new string ToolPath => GetToolPath();
 
         public string WorkingDirectory { get; set;  }
 

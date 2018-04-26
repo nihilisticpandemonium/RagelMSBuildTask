@@ -10,7 +10,7 @@
     <!-- Change the default location where NuGet will put the build output -->
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <!-- set the version automatically -->
-    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
     <!--<VersionSuffix>build$([System.DateTime]::Now.ToString('yyyyMMdd-HHmm'))</VersionSuffix>-->
         <Authors>Michael Tindal</Authors>
         <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
@@ -30,6 +30,7 @@
   <ItemGroup>
     <Content Include="build\*" PackagePath="build\" />
     <Content Include="buildMultiTargeting\*" PackagePath="buildMultiTargeting\" />
+    <None Include="tools\*" Pack="true" PackagePack="tools\" />
   </ItemGroup>
 
   <ItemGroup>
