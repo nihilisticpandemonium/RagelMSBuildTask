@@ -61,8 +61,7 @@ namespace MSBuildTasks
             get
             {
                 var assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var p = Path.DirectorySeparatorChar;
-                return $"{assemblyFolder}{p}..{p}..{p}content{p}tools{p}";
+                return Path.Combine(new string[] { assemblyFolder, "..", "..", "content", "tools" });
             }
         }
 

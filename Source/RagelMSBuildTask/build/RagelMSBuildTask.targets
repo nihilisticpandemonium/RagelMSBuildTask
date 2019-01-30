@@ -1,4 +1,4 @@
-<Project>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Target Name="Ragel" Inputs="@(Ragel)" Outputs="$(BaseIntermediateOutputPath)$(Configuration)\@(Ragel-&gt;%(Filename).cs)">
         <RagelTask Sources="@(Ragel)" OutputPath="$(BaseIntermediateOutputPath)$(Configuration)\">
             <Output ItemName="Generated" TaskParameter="Outputs" />
@@ -28,4 +28,5 @@
     <ItemGroup>
         <AvailableItemName Include="Ragel" />   
     </ItemGroup>
+    <Import Project="RagelMSBuildTask.DefaultItems.targets"/>
 </Project>

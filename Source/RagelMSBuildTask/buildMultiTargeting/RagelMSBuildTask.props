@@ -2,6 +2,6 @@
   This file is automatically imported by NuGet into a user's project
   when it targets multiple frameworks, e.g. <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
 -->
-<Project>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\build\RagelMSBuildTask.props" />
 </Project>
