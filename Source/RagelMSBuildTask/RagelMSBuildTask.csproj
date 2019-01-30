@@ -10,16 +10,16 @@
     <!-- Change the default location where NuGet will put the build output -->
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <!-- set the version automatically -->
-    <VersionPrefix>1.1.2</VersionPrefix>
+    <VersionPrefix>1.1.4</VersionPrefix>
         <!--<VersionSuffix>build$([System.DateTime]::Now.ToString('yyyyMMdd-HHmm'))</VersionSuffix>-->
-        <Authors>Michael Tindal</Authors>
-        <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
-        <PackageProjectUrl>https://bitbucket.org/chaoticvoid/ragelmsbuildtask</PackageProjectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <Description>A MSBuild task to generate C# files from Ragel source files.</Description>
-        <PackageReleaseNotes />
-        <Copyright>Copyright 2018 Michael Tindal</Copyright>
-        <PackageTags>ragel msbuild</PackageTags>
+    <Authors>Michael Tindal</Authors>
+    <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nihilisticpandemonium/RagelMSBuildTask.git</PackageProjectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <Description>A MSBuild task to generate C# files from Ragel source files.</Description>
+    <PackageReleaseNotes />
+    <Copyright>Copyright 2018-2019 Michael Tindal</Copyright>
+    <PackageTags>ragel msbuild</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">

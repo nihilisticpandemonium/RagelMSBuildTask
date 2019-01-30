@@ -1,32 +1,32 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Target Name="Ragel" Inputs="@(Ragel)" Outputs="$(BaseIntermediateOutputPath)$(Configuration)\@(Ragel-&gt;%(Filename).cs)">
-        <RagelTask Sources="@(Ragel)" OutputPath="$(BaseIntermediateOutputPath)$(Configuration)\">
-            <Output ItemName="Generated" TaskParameter="Outputs" />
-        </RagelTask>
-        <ItemGroup>
-            <Compile Include="@(Generated)" />
-            <FileWrites Include="@(Generated)" />
-            <!-- For clean to work properly -->
-        </ItemGroup>
-    </Target>
-    <PropertyGroup>
-        <GeneratedRagelCode>
+  <Target Name="Ragel" Inputs="@(Ragel)" Outputs="$(IntermediateOutputPath)\@(Ragel-&gt;%(Filename).cs)">
+    <RagelTask Sources="@(Ragel)" OutputPath="$(IntermediateOutputPath)\">
+      <Output ItemName="Generated" TaskParameter="Outputs" />
+    </RagelTask>
+    <ItemGroup>
+      <Compile Include="@(Generated)" />
+      <FileWrites Include="@(Generated)" />
+      <!-- For clean to work properly -->
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <GeneratedRagelCode>
             Ragel
-        </GeneratedRagelCode>
-    </PropertyGroup>
-    <Target Name="GenerateRagelCode" DependsOnTargets="$(GeneratedRagelCode)" />
-    <PropertyGroup>
-        <CoreCompileDependsOn>
+    </GeneratedRagelCode>
+  </PropertyGroup>
+  <Target Name="GenerateRagelCode" DependsOnTargets="$(GeneratedRagelCode)" />
+  <PropertyGroup>
+    <CoreCompileDependsOn>
             GenerateRagelCode;
             $(CoreCompileDependsOn)
-        </CoreCompileDependsOn>
-        <BuildDependsOn>
+    </CoreCompileDependsOn>
+    <BuildDependsOn>
             GenerateRagelCode;
             $(BuildDependsOn)
-        </BuildDependsOn>
-    </PropertyGroup>
-    <ItemGroup>
-        <AvailableItemName Include="Ragel" />   
-    </ItemGroup>
-    <Import Project="RagelMSBuildTask.DefaultItems.targets"/>
+    </BuildDependsOn>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvailableItemName Include="Ragel" />
+  </ItemGroup>
+  <Import Project="RagelMSBuildTask.DefaultItems.targets"/>
 </Project>

@@ -4,7 +4,7 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
 
-  <ItemGroup '$(EnableDefaultItems)' == 'True' AND '$(EnableDefaultRagelItems)' == 'True'">
+  <ItemGroup Condition="'$(EnableDefaultItems)' == 'True' AND '$(EnableDefaultRagelItems)' == 'True'">
     <Ragel Include="**/*.rl" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
 </Project>
