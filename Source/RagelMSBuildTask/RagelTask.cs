@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -29,31 +30,37 @@ namespace MSBuildTasks
         {
             get
             {
-                string windir = Environment.GetEnvironmentVariable("windir");
+                var osArchitecture = RuntimeInformation.ProcessArchitecture;
+                var windir = Environment.GetEnvironmentVariable("windir");
                 if (!string.IsNullOrEmpty(windir) && windir.Contains(@"\") && Directory.Exists(windir))
                 {
                     return "ragel.exe";
                 }
-                else if (File.Exists(@"/proc/sys/kernel/ostype"))
+
+                if (File.Exists(@"/proc/sys/kernel/ostype"))
                 {
-                    string osType = File.ReadAllText(@"/proc/sys/kernel/ostype");
+                    var osType = File.ReadAllText(@"/proc/sys/kernel/ostype");
                     if (osType.StartsWith("Linux", StringComparison.OrdinalIgnoreCase))
                     {
-                        // Note: Android gets here too
-                        return "ragel-Linux-x86_64";
+                        return osArchitecture switch
+                        {
+                            Architecture.X64 => "ragel-Linux-x86_64",
+                            Architecture.Arm64 => "ragel-Linux-arm64",
+                            _ => null
+                        };
                     }
-                    else
-                    {
-                        return null;
-                    }
+
+                    return null;
                 }
-                else if (File.Exists(@"/System/Library/CoreServices/SystemVersion.plist"))
+
+                if (File.Exists(@"/System/Library/CoreServices/SystemVersion.plist"))
                 {
                     // Note: iOS gets here too
                     return "ragel-Darwin-x86_64";
                 }
                 return null;
             }
+            
         }
 
         protected new string ToolPath
@@ -61,7 +68,7 @@ namespace MSBuildTasks
             get
             {
                 var assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                return Path.Combine(new string[] { assemblyFolder, "..", "..", "content", "tools" });
+                return Path.Combine(assemblyFolder, "..", "..", "content", "tools");
             }
         }
 

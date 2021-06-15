@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net46</TargetFrameworks>
+    <TargetFrameworks>net5.0;net48</TargetFrameworks>
     <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\artifacts\</PackageOutputPath>
     <!-- Suppresses the warnings about the package not having assemblies in lib/*/.dll.-->
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <!-- Change the default location where NuGet will put the build output -->
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <!-- set the version automatically -->
-    <VersionPrefix>1.1.7</VersionPrefix>
+    <VersionPrefix>1.1.8</VersionPrefix>
         <!--<VersionSuffix>build$([System.DateTime]::Now.ToString('yyyyMMdd-HHmm'))</VersionSuffix>-->
     <Authors>Michael Tindal</Authors>
     <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
@@ -16,8 +16,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <Description>A MSBuild task to generate C# files from Ragel source files.</Description>
     <PackageReleaseNotes />
-    <Copyright>Copyright 2018-2019 Michael Tindal</Copyright>
+    <Copyright>Copyright 2018-2021 Michael Tindal</Copyright>
     <PackageTags>ragel msbuild</PackageTags>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
